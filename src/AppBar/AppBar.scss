@@ -1,0 +1,33 @@
+@import '../theme.scss';
+
+$AppBar-height: 64px;
+
+.root {
+
+}
+
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: 2;
+  top: 0;
+  height: $AppBar-height;
+  background-color: $primary-color;
+  padding-left: $gutter-padding;
+  padding-right: $gutter-padding;
+}
+
+.title {
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $light-text-color;
+  line-height: $AppBar-height;
+}
+
+.spacer {
+  height: $AppBar-height
+}

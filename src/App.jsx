@@ -1,5 +1,5 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
+import AppBar from './AppBar/AppBar.jsx';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import RecipeContainer from './RecipeContainer.jsx';
@@ -30,8 +30,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <AppBar style={styles.appBar} title="Recipe Box" showMenuIconButton={false} />
-        <div style={styles.appBarSpacer} />
+        <AppBar title="Recipe Box testing the box wrappingaround the sides this is really long so as to simulate long text" />
         <RecipeContainer />
         <FloatingActionButton style={styles.floatingActionButton}>
           <ContentAdd />

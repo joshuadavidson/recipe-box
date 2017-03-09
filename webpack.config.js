@@ -75,7 +75,12 @@ const scssLoaderRule = {
   exclude: /(node_modules)/,
   use: ExtractSassPluginConfig.extract({
     use: [
-      { loader: 'css-loader' },
+      { loader: 'css-loader',
+        options: {
+          modules: true,
+          localIdentName: '[name]--[local]--[hash:base64:5]',
+        },
+      },
       { loader: 'postcss-loader', options: postcssOptions },
       { loader: 'sass-loader' },
     ],
