@@ -69,9 +69,10 @@ const postcssOptions = {
     return [autoprefixer];
   },
 };
-// configuration rule for the processing of SCSS files
-const scssLoaderRule = {
-  test: /\.(scss|css)$/,
+// configuration rule for the processing of modular SCSS files
+// all css and scss files without .global. in filename will be treated as modular
+const moduleSCSSLoaderRule = {
+  test: /^((?!\.global).)*(scss|css)$/,
   exclude: /(node_modules)/,
   use: ExtractSassPluginConfig.extract({
     use: [
@@ -81,6 +82,19 @@ const scssLoaderRule = {
           localIdentName: '[name]--[local]--[hash:base64:5]',
         },
       },
+      { loader: 'postcss-loader', options: postcssOptions },
+      { loader: 'sass-loader' },
+    ],
+  }),
+};
+// configuration rule for the processing of global SCSS files
+// file must contain .global. to avoid css modularization
+const globalSCSSLoaderRule = {
+  test: /\.global\.(scss|css)$/,
+  exclude: /(node_modules)/,
+  use: ExtractSassPluginConfig.extract({
+    use: [
+      { loader: 'css-loader' },
       { loader: 'postcss-loader', options: postcssOptions },
       { loader: 'sass-loader' },
     ],
@@ -140,7 +154,10 @@ module.exports = function getWebpackConfig(env) {
   const webpackConfig = {
     context: path.join(__dirname, '/src'),
     devtool: false,
-    entry: [path.join(__dirname, '/src/index.jsx')],
+    entry: [
+      path.join(__dirname, '/src/index.jsx'),
+      path.join(__dirname, '/src/index.global.scss'),
+    ],
     output: {
       path: path.join(__dirname, '/dist'),
       filename: 'index.js',
@@ -148,7 +165,8 @@ module.exports = function getWebpackConfig(env) {
     module: {
       rules: [
         javascriptLoaderRule,
-        scssLoaderRule,
+        moduleSCSSLoaderRule,
+        globalSCSSLoaderRule,
         imageFileLoaderRule,
         audioVideoFileLoaderRule,
         fontFileLoaderRule,
@@ -177,6 +195,7 @@ module.exports = function getWebpackConfig(env) {
       contentBase: path.join(__dirname, '/dist'),
       compress: true,
       port: 3000,
+      historyApiFallback: true,
     };
   }
 

@@ -6,9 +6,18 @@
 // Pull in normalize css
 @import '../node_modules/normalize.css/normalize.css';
 
+// import font awesome, set fontpath so that font urls resolve during compilation
+$fa-font-path: "../node_modules/font-awesome/fonts";
+@import '../node_modules/font-awesome/scss/font-awesome.scss';
+
 // Roboto font from google
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 * {
   font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }

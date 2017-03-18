@@ -1,0 +1,41 @@
+@import '../../styles/variables.scss';
+
+.root {
+  @include box-shadow;
+  position: relative;
+  width: 320px;
+  height: 180px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  margin: 5px;
+}
+
+.titleBar {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 68px;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+}
+
+.titleWrap {
+  flex-grow: 1;
+  margin-left: $gutter-padding;
+  margin-right: 0px;
+  color: $light-text-color;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 16px;
+  @include text-overflow-nicely;
+}
+
+.subtitle {
+  font-size: 12px;
+  @include text-overflow-nicely;
+}

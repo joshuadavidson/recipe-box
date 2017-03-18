@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './AppBar.scss';
 
@@ -7,10 +8,9 @@ function AppBar(props) {
     <div className={styles.root}>
       <div className={styles.header}>
         <div className={styles.title}>
-          {props.title}
-        </div>
-        <div className={styles.menu}>
-          This Menu
+          <Link to={'/'}>
+            {props.title}
+          </Link>
         </div>
       </div>
       <div className={styles.spacer} />

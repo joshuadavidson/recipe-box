@@ -1,7 +1,15 @@
 import React from 'react';
-import RecipeTile from './RecipeTile.jsx';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-export default class RecipeContainer extends React.Component {
+import AppBar from './AppBar/AppBar.jsx';
+import HomePage from './Pages/HomePage.jsx';
+import RecipePage from './Pages/RecipePage.jsx';
+import NewRecipePage from './Pages/NewRecipePage.jsx';
+
+
+const emptyplate = require('../img/emptyplate.jpg');
+
+export default class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -28,7 +36,7 @@ export default class RecipeContainer extends React.Component {
           subtitle: 'by Josh Davidson',
         },
         {
-          imgUrl: 'http://www.ikea.com/PIAimages/22395_PE107272_S5.JPG',
+          imgUrl: emptyplate,
           title: 'Salmon',
           subtitle: 'by Josh Davidson',
         },
@@ -42,27 +50,34 @@ export default class RecipeContainer extends React.Component {
   }
 
   render() {
-    const styles = {
-      root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-      },
-    };
-
     return (
-      <div style={styles.root}>
-        {this.state.recipes.map(recipe => (
-
-          <RecipeTile
-            key={recipe.imgUrl}
-            title={recipe.title}
-            subtitle={recipe.subtitle}
-            imgUrl={recipe.imgUrl}
+      <Router>
+        <div>
+          <AppBar title="Recipe Box" />
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <HomePage recipes={this.state.recipes} />
+            )}
           />
 
-        ))}
-      </div>
+          <Route
+            exact
+            path="/recipes/:recipe"
+            render={({ match }) => (
+              <RecipePage recipe={match.params.recipe} />
+            )}
+          />
+
+          <Route
+            exact
+            path="/new"
+            component={NewRecipePage}
+          />
+
+        </div>
+      </Router>
     );
   }
 }

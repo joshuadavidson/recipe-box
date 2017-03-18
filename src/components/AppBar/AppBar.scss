@@ -1,4 +1,4 @@
-@import '../theme.scss';
+@import '../../styles/variables.scss';
 
 $AppBar-height: 64px;
 
@@ -7,25 +7,21 @@ $AppBar-height: 64px;
 }
 
 .header {
+  @include box-shadow;
   position: fixed;
-  display: flex;
-  align-items: center;
   width: 100%;
   z-index: 2;
-  top: 0;
   height: $AppBar-height;
   background-color: $primary-color;
-  padding-left: $gutter-padding;
-  padding-right: $gutter-padding;
 }
 
 .title {
+  @include text-overflow-nicely;
   font-size: 24px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   color: $light-text-color;
   line-height: $AppBar-height;
+  padding-left: $gutter-padding;
+  padding-right: $gutter-padding;
 }
 
 .spacer {
